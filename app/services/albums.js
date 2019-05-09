@@ -1,14 +1,12 @@
 const request = require('request-promise-native'),
   errors = require('../errors'),
-  { endpoints } = require('../constants/endpoints'),
+  { endpoints } = require('../../config').common,
   logger = require('../logger/');
-
-errors.ALBUM_API_ERROR = 501;
 
 exports.getAlbums = () => {
   const options = {
     method: 'GET',
-    uri: endpoints.ALBUM_API_URL
+    uri: endpoints.albumApiUrl
   };
   logger.info(`Request to make: ${options.method} ${options.uri}`);
   return request(options).catch(error =>
@@ -19,7 +17,7 @@ exports.getAlbums = () => {
 exports.getPhotosByAlbumId = id => {
   const options = {
     method: 'GET',
-    uri: `${endpoints.ALBUM_API_URL}:${id}/photos`
+    uri: `${endpoints.albumApiUrl}:${id}/photos`
   };
   logger.info(`Request to make: ${options.method} ${options.uri}`);
   return request(options).catch(error =>

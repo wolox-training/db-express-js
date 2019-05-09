@@ -41,6 +41,9 @@ const config = {
     session: {
       header_name: 'authorization',
       secret: process.env.NODE_API_SESSION_SECRET
+    },
+    endpoints: {
+      albumApiUrl: process.env.ALBUM_API_URL
     }
   }
 };

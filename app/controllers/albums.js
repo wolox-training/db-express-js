@@ -1,16 +1,19 @@
 const albumsService = require('../services/albums'),
   logger = require('../logger');
 
-exports.albumsGET = (req, res, next) =>
-  albumsService
+exports.getAlbumsList = (req, res, next) => {
+  logger.info('GET method start. Fetching albums list.');
+  return albumsService
     .getAlbums()
     .then(albums => {
       logger.info('Request successful. List of albums retrieved.');
       return res.status(200).send(albums);
     })
     .catch(next);
+};
 
-exports.albumsGETPhotos = (req, res, next) => {
+exports.getPhotosByAlbumId = (req, res, next) => {
+  logger.info('GET method start. Fetching photos.');
   const { id } = req.params;
   return albumsService
     .getPhotosByAlbumId(id)
