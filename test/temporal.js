@@ -1,7 +1,10 @@
-function sum(a, b) {
-  return a + b;
+const albums = require('../app/services/albums.js'),
+  logger = require('../app/logger');
+
+function getAlbumTest() {
+  return albums.getAlbums();
 }
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
+test('Prints log', () => {
+  getAlbumTest().then(response => logger.info(`Test successful, reponse with length: ${response.length}`));
 });
