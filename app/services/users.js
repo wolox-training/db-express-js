@@ -1,14 +1,7 @@
-// errors = require('../errors')
-const logger = require('../logger'),
-  userRegistration = require('../helpers/user-registration');
+const errors = require('../errors'),
+  { users } = require('../models');
 
-exports.registerUser = user => {
-  userRegistration.formatUser(user);
-  return userRegistration
-    .validateUser(user)
-    .then(valid => {
-      logger.info(valid);
-      return userRegistration.createUser(user);
-    })
-    .then(inserted => inserted.dataValues);
-};
+exports.registerUser = user =>
+  users
+    .create(user)
+    .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));

@@ -17,3 +17,6 @@ exports.userValidationError = message => internalError(message, exports.USER_VAL
 
 exports.UNIQUE_CONSRAINT_ERROR = 'unique_constraint_error';
 exports.uniqueConstraintError = message => internalError(message, exports.USER_VALIDATION_ERROR);
+
+exports.SCHEMA_ERROR = 'schema_error';
+exports.schemaError = message => internalError(message, exports.SCHEMA_ERROR);
