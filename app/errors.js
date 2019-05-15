@@ -20,3 +20,6 @@ exports.uniqueConstraintError = message => internalError(message, exports.USER_V
 
 exports.SCHEMA_ERROR = 'schema_error';
 exports.schemaError = message => internalError(message, exports.SCHEMA_ERROR);
+
+exports.BAD_LOGIN_ERROR = 'bad_login_error';
+exports.badLogInError = message => internalError(message, exports.BAD_LOGIN_ERROR);

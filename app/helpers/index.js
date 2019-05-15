@@ -19,3 +19,8 @@ exports.testRegex = (value, regexString, flag) => {
 };
 
 exports.encodePassword = password => bcrypt.hash(password, 10);
+
+exports.comparePassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
+
+// decodePasswordaAndCompare('1234_wol0x', '$2b$10$QyCTfl29yXujZPG8HbVxVeeW2dgmE6nwqW2GtQHqydN7E55uMjCkC')
+//   .then(console.log);
