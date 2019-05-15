@@ -2,8 +2,9 @@ const logger = require('../logger'),
   users = require('../services/users'),
   usersMapper = require('../mappers/users'),
   helper = require('../helpers'),
-  errors = require('../errors');
-//  jwt = require('jsonwebtoken');
+  errors = require('../errors'),
+  jwt = require('jsonwebtoken-promisified'),
+  config = require('../../config').common.session;
 
 exports.userRegistration = (req, res, next) => {
   logger.info('POST method start. User registration.');
@@ -21,19 +22,21 @@ exports.userRegistration = (req, res, next) => {
 exports.userLogIn = (req, res, next) => {
   logger.info('POST method start. User authentication.');
   const user = req.body;
+  let storedUser = {};
   return users
     .getUserByEmail(user.email)
-    .then(storedUser =>
-      storedUser
-        ? helper.comparePassword(user.password, storedUser.password)
-        : Promise.reject(errors.badLogInError(`User with email ${user.email} not found`))
-    )
+    .then(response => {
+      if (response) {
+        storedUser = response.dataValues;
+        return helper.comparePassword(user.password, storedUser.password);
+      }
+      return Promise.reject(errors.badLogInError(`User with email ${user.email} not found`));
+    })
     .then(isPassword =>
       isPassword
-        ? res.status(200).send({ isPassword, message: 'User authenticated' })
+        ? jwt.signAsync({ username: user.email }, config.secret)
         : Promise.reject(errors.badLogInError('Incorret password'))
     )
+    .then(token => res.status(200).send({ token, id: storedUser.id }))
     .catch(next);
 };
-
-// const createToken = username => {};
