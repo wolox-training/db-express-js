@@ -1,13 +1,16 @@
 const bcrypt = require('bcrypt');
 
 exports.formatName = name => {
-  const names = name.trim().split(' ');
-  let formattedName = '';
-  names.forEach(current => {
-    const word = current.trim().toLowerCase();
-    formattedName += `${word[0].toUpperCase()}${word.slice(1)} `;
-  });
-  return formattedName.trim();
+  if (name) {
+    const names = name.trim().split(' ');
+    let formattedName = '';
+    names.forEach(current => {
+      const word = current.trim().toLowerCase();
+      formattedName += `${word[0].toUpperCase()}${word.slice(1)} `;
+    });
+    return formattedName.trim();
+  }
+  return name;
 };
 
 exports.testRegex = (value, regexString, flag) => {

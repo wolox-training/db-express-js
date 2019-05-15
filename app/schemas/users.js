@@ -3,9 +3,13 @@ const helper = require('../helpers');
 exports.signUp = {
   name: {
     in: ['body'],
+    isLength: {
+      options: { min: 1 }
+    },
     custom: {
       options: value => helper.testRegex(value, "^[a-z' ]+$", 'i')
     },
+    trim: true,
     customSanitizer: {
       options: helper.formatName
     },
@@ -13,9 +17,13 @@ exports.signUp = {
   },
   last_name: {
     in: ['body'],
+    isLength: {
+      options: { min: 1 }
+    },
     custom: {
       options: value => helper.testRegex(value, "^[a-z' ]+$", 'i')
     },
+    trim: true,
     customSanitizer: {
       options: helper.formatName
     },
