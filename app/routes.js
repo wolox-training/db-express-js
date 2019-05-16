@@ -10,6 +10,7 @@ exports.init = app => {
   app.get('/albums', albums.getAlbumsList);
   app.get('/albums/:id/photos', albums.getPhotosByAlbumId);
 
+  app.get('/users');
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post('/users/sessions', [schemaMiddleware.validateSchemaAndFail(schemas.users.logIn)], users.userLogIn);
 };
