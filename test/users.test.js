@@ -1,17 +1,19 @@
 const request = require('supertest'),
-  app = require('../app');
+  app = require('../app'),
+  dictum = require('dictum.js');
 
 describe('Health check', () => {
-  test('It should show the uptime', () =>
+  test('It should respond with code 200', () =>
     request(app)
       .get('/health')
       .then(response => {
         expect(response.statusCode).toBe(200);
+        dictum.chai(response, 'Test successful sign up');
       }));
 });
 
-describe('POST /users. Test successful sign up', () => {
-  test('It should response with code 201', () =>
+describe('POST /users', () => {
+  test('Test successful sign up. It should response with code 201', () =>
     request(app)
       .post('/users')
       .send({
@@ -22,11 +24,10 @@ describe('POST /users. Test successful sign up', () => {
       })
       .then(response => {
         expect(response.statusCode).toBe(201);
+        dictum.chai(response, 'Test successful sign up');
       }));
-});
 
-describe('POST /users. Test used email', () => {
-  test('It should fail with code 503', () => {
+  test('Test used email. It should respond with 503', () => {
     const agent = request(app);
     return agent
       .post('/users')
@@ -47,13 +48,12 @@ describe('POST /users. Test used email', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(503);
+            dictum.chai(response, 'Test used email');
           })
       );
   });
-});
 
-describe('POST /users. Test uinvalid password', () => {
-  test('It should fail with code 409, due to invalid password', () =>
+  test('Test invalid password. It should fail with code 422', () =>
     request(app)
       .post('/users')
       .send({
@@ -63,6 +63,7 @@ describe('POST /users. Test uinvalid password', () => {
         password: '123r'
       })
       .then(response => {
-        expect(response.statusCode).toBe(409);
+        expect(response.statusCode).toBe(422);
+        dictum.chai(response, 'Test invalid password');
       }));
 });

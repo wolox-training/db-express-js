@@ -1,8 +1,9 @@
 const request = require('supertest'),
-  app = require('../app');
+  app = require('../app'),
+  dictum = require('dictum.js');
 
-describe('POST /users/sessions. Test user log in', () => {
-  test('It should respond with code 200', () => {
+describe('POST /users/sessions', () => {
+  test('Test user-log in. It should respond with code 200', () => {
     const agent = request(app);
     return agent
       .post('/users')
@@ -21,13 +22,12 @@ describe('POST /users/sessions. Test user log in', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(200);
+            dictum.chai(response, 'Test user-log in');
           })
       );
   });
-});
 
-describe('POST /users/sessions. Test log in fail due to wrong email', () => {
-  test('It should respond with 403', () => {
+  test('Test log-in fail due to wrong email. It should respond with 403', () => {
     const agent = request(app);
     return agent
       .post('/users')
@@ -46,13 +46,12 @@ describe('POST /users/sessions. Test log in fail due to wrong email', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(403);
+            dictum.chai(response, 'Test log-in fail due to wrong emailp');
           })
       );
   });
-});
 
-describe('POST /users/sessions. Test log in fail due to wrong password', () => {
-  test('It should respond with 403', () => {
+  test('Test log-in fail due to wrong password. It should respond with 403', () => {
     const agent = request(app);
     return agent
       .post('/users')
@@ -71,6 +70,7 @@ describe('POST /users/sessions. Test log in fail due to wrong password', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(403);
+            dictum.chai(response, 'Test log-in fail due to wrong password');
           })
       );
   });
