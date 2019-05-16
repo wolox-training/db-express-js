@@ -28,7 +28,7 @@ describe('POST /users. Test successful sign up', () => {
 describe('POST /users. Test used email', () => {
   test('It should fail with code 503', () => {
     const agent = request(app);
-    agent
+    return agent
       .post('/users')
       .send({
         name: 'ArquiMedes',
@@ -36,7 +36,7 @@ describe('POST /users. Test used email', () => {
         email: 'arquimedes.ali@wolox.ar',
         password: '123r-asd+df-f'
       })
-      .end(() => {
+      .then(() =>
         agent
           .post('/users')
           .send({
@@ -47,8 +47,8 @@ describe('POST /users. Test used email', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(503);
-          });
-      });
+          })
+      );
   });
 });
 
