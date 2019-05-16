@@ -2,9 +2,7 @@ const logger = require('../logger'),
   users = require('../services/users'),
   usersMapper = require('../mappers/users'),
   helper = require('../helpers'),
-  errors = require('../errors'),
-  jwt = require('jsonwebtoken-promisified'),
-  config = require('../../config').common.session;
+  errors = require('../errors');
 
 exports.userRegistration = (req, res, next) => {
   logger.info('POST method start. User registration.');
@@ -34,7 +32,7 @@ exports.userLogIn = (req, res, next) => {
     })
     .then(isPassword =>
       isPassword
-        ? jwt.signAsync({ username: user.email }, config.secret)
+        ? helper.generateToken({ username: user.email }, '1h')
         : Promise.reject(errors.badLogInError('Incorret password'))
     )
     .then(token => res.status(200).send({ token, id: storedUser.id }))
