@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt'),
-  jwt = require('jsonwebtoken-promisified'),
-  config = require('../../config').common.session;
+const bcrypt = require('bcrypt');
+
+exports.sessions = require('./sessions');
 
 exports.formatName = name => {
   if (name) {
@@ -23,8 +23,3 @@ exports.testRegex = (value, regexString, flag) => {
 exports.encodePassword = password => bcrypt.hash(password, 10);
 
 exports.comparePassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
-
-exports.generateToken = (payload, expiresIn) => jwt.signAsync(payload, config.secret, expiresIn);
-
-// decodePasswordaAndCompare('1234_wol0x', '$2b$10$QyCTfl29yXujZPG8HbVxVeeW2dgmE6nwqW2GtQHqydN7E55uMjCkC')
-//   .then(console.log);

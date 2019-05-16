@@ -32,7 +32,7 @@ exports.userLogIn = (req, res, next) => {
     })
     .then(isPassword =>
       isPassword
-        ? helper.generateToken({ username: user.email }, '1h')
+        ? helper.sessions.generateToken({ username: user.email }, '1h')
         : Promise.reject(errors.badLogInError('Incorret password'))
     )
     .then(token => res.status(200).send({ token, id: storedUser.id }))
