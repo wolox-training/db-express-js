@@ -10,7 +10,8 @@ exports.getUserByEmail = email =>
   users
     .findOne({
       where: { email },
-      attributes: ['id', 'name', 'lastName', 'password']
+      attributes: ['id', 'name', 'lastName', 'password'],
+      raw: true
     })
     .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));
 
