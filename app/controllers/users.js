@@ -49,15 +49,6 @@ exports.getUsersList = (req, res, next) => {
   const offset = req.skip;
   return users
     .getUsers(limit, offset)
-    .then(usersList => {
-      const itemCount = usersList.count;
-      const pageCount = Math.ceil(usersList.count / req.query.limit);
-      return res.status(200).send({
-        users: usersList.rows,
-        page,
-        pageCount,
-        itemCount
-      });
-    })
+    .then(usersList => res.status(200).send(usersMapper.usersListResponse(limit, page, usersList)))
     .catch(next);
 };

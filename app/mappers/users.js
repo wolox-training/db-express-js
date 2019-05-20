@@ -9,3 +9,14 @@ exports.encryptAndFormat = user =>
       password
     }))
     .catch(error => Promise.reject(error.message));
+
+exports.usersListResponse = (limit, page, usersList) => {
+  const itemCount = usersList.count;
+  const pageCount = Math.ceil(usersList.count / limit);
+  return {
+    users: usersList.rows,
+    page,
+    pageCount,
+    itemCount
+  };
+};
