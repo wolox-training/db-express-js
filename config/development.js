@@ -5,7 +5,7 @@ exports.config = {
       name: process.env.DB_NAME_DEV
     },
     session: {
-      secret: 'spiral-out-keep-going'
+      secret: process.env.SESSION_SECRET
     }
   },
   isDevelopment: true

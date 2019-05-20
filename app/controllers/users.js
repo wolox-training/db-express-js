@@ -25,16 +25,21 @@ exports.userLogIn = (req, res, next) => {
     .getUserByEmail(user.email)
     .then(response => {
       if (response) {
-        storedUser = response.dataValues;
+        storedUser = response;
         return helper.comparePassword(user.password, storedUser.password);
       }
-      return Promise.reject(errors.badLogInError(`User with email ${user.email} not found`));
+      return Promise.reject(errors.badLogInError('The email or password provided is incorrect'));
     })
     .then(isPassword =>
       isPassword
         ? helper.sessions.generateToken({ username: user.email }, '1h')
-        : Promise.reject(errors.badLogInError('Incorret password'))
+        : Promise.reject(errors.badLogInError('The email or password provided is incorrect'))
     )
-    .then(token => res.status(200).send({ token, id: storedUser.id }))
+    .then(token =>
+      res
+        .status(200)
+        .set({ authorization: token })
+        .send({ message: `User with id ${storedUser.id} authenticated` })
+    )
     .catch(next);
 };
