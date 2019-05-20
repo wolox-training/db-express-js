@@ -21,6 +21,7 @@ exports.getUsers = (limit, offset) =>
       limit,
       offset,
       attributes: ['id', 'name', 'email'],
-      order: ['id']
+      order: ['id'],
+      raw: true
     })
     .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));
