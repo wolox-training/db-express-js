@@ -3,7 +3,7 @@ const request = require('supertest'),
   dictum = require('dictum.js');
 
 describe('Health check', () => {
-  test('It responde with code 200', () =>
+  test('It should respond with code 200', () =>
     request(app)
       .get('/health')
       .then(response => {

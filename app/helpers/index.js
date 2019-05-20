@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 
+exports.sessions = require('./sessions');
+
 exports.formatName = name => {
   if (name) {
     const names = name.trim().split(' ');
@@ -19,3 +21,5 @@ exports.testRegex = (value, regexString, flag) => {
 };
 
 exports.encodePassword = password => bcrypt.hash(password, 10);
+
+exports.comparePassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
