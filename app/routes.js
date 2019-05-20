@@ -1,7 +1,7 @@
 const { healthCheck } = require('./controllers/healthCheck'),
   albums = require('./controllers/albums'),
   users = require('./controllers/users'),
-  schemaMiddleware = require('./middlewares/schema-validator'),
+  schemaMiddleware = require('./middlewares/schema_validator'),
   sessionMiddleware = require('./middlewares/sessions'),
   schemas = require('./schemas'),
   paginate = require('express-paginate');

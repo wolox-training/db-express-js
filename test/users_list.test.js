@@ -26,7 +26,7 @@ describe('GET /users', () => {
             expect(logIn.statusCode).toBe(200);
             return agent
               .get('/users')
-              .set({ Authorization: logIn.body.token })
+              .set({ Authorization: logIn.headers.authorization })
               .then(response => {
                 expect(response.statusCode).toBe(200);
                 dictum.chai(response, 'Test get users list. It should respond with code 200');
