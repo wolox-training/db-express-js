@@ -32,9 +32,27 @@ exports.userLogIn = (req, res, next) => {
     })
     .then(isPassword =>
       isPassword
-        ? helper.sessions.generateToken({ username: user.email }, '1h')
+        ? helper.sessions.generateToken({ username: user.email, role: 'standar' }, 15 * 60)
         : Promise.reject(errors.badLogInError('Incorret password'))
     )
     .then(token => res.status(200).send({ token, id: storedUser.id }))
+    .catch(next);
+};
+
+exports.getUsersList = (req, res, next) => {
+  const { limit, page } = req.query;
+  const offset = req.skip;
+  return users
+    .getUsers(limit, offset)
+    .then(usersList => {
+      const itemCount = usersList.count;
+      const pageCount = Math.ceil(usersList.count / req.query.limit);
+      return res.status(200).send({
+        users: usersList.rows,
+        page,
+        pageCount,
+        itemCount
+      });
+    })
     .catch(next);
 };

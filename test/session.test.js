@@ -46,7 +46,7 @@ describe('POST /users/sessions', () => {
           })
           .then(response => {
             expect(response.statusCode).toBe(403);
-            dictum.chai(response, 'Test log-in fail due to wrong emailp');
+            dictum.chai(response, 'Test log-in fail due to wrong email');
           })
       );
   });
