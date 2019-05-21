@@ -16,5 +16,14 @@ exports.init = app => {
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post('/users/sessions', [schemaMiddleware.validateSchemaAndFail(schemas.users.logIn)], users.userLogIn);
 
-  app.post('/admin/users');
+  app.post(
+    '/admin/users',
+    [
+      sessionMiddleware.isUserAuthenticated,
+      schemaMiddleware.validateSchemaAndFail(schemas.users.signUp),
+      sessionMiddleware.isUserInRole('admin')
+    ],
+    users.changeUserRole('admin'),
+    users.userRegistration
+  );
 };

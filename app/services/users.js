@@ -10,7 +10,7 @@ exports.getUserByEmail = email =>
   users
     .findOne({
       where: { email },
-      attributes: ['id', 'name', 'lastName', 'password'],
+      attributes: ['id', 'name', 'lastName', 'email', 'password', 'role'],
       raw: true
     })
     .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));
@@ -24,4 +24,9 @@ exports.getUsers = (limit, offset) =>
       order: ['id'],
       raw: true
     })
+    .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));
+
+exports.changeRole = (email, role) =>
+  users
+    .update({ role }, { where: { email }, returning: true, raw: true })
     .catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.errors[0].message}`)));

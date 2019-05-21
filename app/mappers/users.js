@@ -20,3 +20,9 @@ exports.usersListResponse = (limit, page, usersList) => {
     itemCount
   };
 };
+
+exports.tokenPayload = user => ({
+  id: user.id,
+  email: user.email,
+  role: user.role
+});
