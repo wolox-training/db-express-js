@@ -23,6 +23,7 @@ module.exports = {
     database: config.name,
     host: config.host,
     dialect: 'postgres',
-    logging: false
+    logging: false,
+    operatorsAliases: false
   }
 };
