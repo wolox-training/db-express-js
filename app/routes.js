@@ -1,8 +1,10 @@
 const { healthCheck } = require('./controllers/healthCheck'),
   albums = require('./controllers/albums'),
   users = require('./controllers/users'),
-  schemaMiddleware = require('./middlewares/schema-validator'),
-  schemas = require('./schemas');
+  schemaMiddleware = require('./middlewares/schema_validator'),
+  sessionMiddleware = require('./middlewares/sessions'),
+  schemas = require('./schemas'),
+  paginate = require('express-paginate');
 
 exports.init = app => {
   app.get('/health', healthCheck);
@@ -10,6 +12,7 @@ exports.init = app => {
   app.get('/albums', albums.getAlbumsList);
   app.get('/albums/:id/photos', albums.getPhotosByAlbumId);
 
+  app.get('/users/', [sessionMiddleware.isUserAuthenticated, paginate.middleware(3, 10)], users.getUsersList);
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post('/users/sessions', [schemaMiddleware.validateSchemaAndFail(schemas.users.logIn)], users.userLogIn);
 };

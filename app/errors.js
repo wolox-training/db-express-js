@@ -23,3 +23,6 @@ exports.schemaError = message => internalError(message, exports.SCHEMA_ERROR);
 
 exports.BAD_LOGIN_ERROR = 'bad_login_error';
 exports.badLogInError = message => internalError(message, exports.BAD_LOGIN_ERROR);
+
+exports.SESSION_ERROR = 'session_error';
+exports.sessionError = message => internalError(message, exports.SESSION_ERROR);

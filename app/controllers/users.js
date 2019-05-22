@@ -43,3 +43,12 @@ exports.userLogIn = (req, res, next) => {
     )
     .catch(next);
 };
+
+exports.getUsersList = (req, res, next) => {
+  const { limit, page } = req.query;
+  const offset = req.skip;
+  return users
+    .getUsers(limit, offset)
+    .then(usersList => res.status(200).send(usersMapper.usersListResponse(limit, page, usersList)))
+    .catch(next);
+};
