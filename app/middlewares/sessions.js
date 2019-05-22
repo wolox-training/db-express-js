@@ -1,6 +1,5 @@
 const errors = require('./../errors'),
-  helper = require('../helpers'),
-  logger = require('../logger');
+  helper = require('../helpers');
 
 exports.isUserAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
@@ -21,10 +20,7 @@ exports.isUserAuthenticated = (req, res, next) => {
   return next(errors.sessionError('Session error: no token provided'));
 };
 
-exports.isUserInRole = expectedRole => (req, res, next) => {
-  logger.info(req.headers.inSession.role, expectedRole);
-  if (req.headers.inSession.role === expectedRole) {
-    return next();
-  }
-  return next(errors.sessionError(`Session error: ${expectedRole} user expected`));
-};
+exports.isUserInRole = expectedRole => (req, res, next) =>
+  req.headers.inSession.role === expectedRole
+    ? next()
+    : next(errors.sessionError(`Session error: ${expectedRole} user expected`));

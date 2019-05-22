@@ -20,8 +20,8 @@ exports.init = app => {
     '/admin/users',
     [
       sessionMiddleware.isUserAuthenticated,
-      schemaMiddleware.validateSchemaAndFail(schemas.users.signUp),
-      sessionMiddleware.isUserInRole('admin')
+      sessionMiddleware.isUserInRole('admin'),
+      schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)
     ],
     users.changeUserRole('admin'),
     users.userRegistration

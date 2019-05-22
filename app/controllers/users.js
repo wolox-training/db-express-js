@@ -55,15 +55,16 @@ exports.getUsersList = (req, res, next) => {
     .catch(next);
 };
 
-exports.changeUserRole = role => (req, res, next) => {
-  logger.info('POST method start. Change user role to admin');
+exports.changeUserRole = newRole => (req, res, next) => {
+  logger.info(`POST method start. Change user role to ${newRole}`);
   const user = req.body;
-  logger.info(role);
-  user.role = role;
+  user.role = newRole;
   return users
     .changeRole(user.email, user.role)
     .then(updated =>
-      updated[0] ? res.status(201).send({ message: `User ${updated[1][0].name} promoted to admin` }) : next()
+      updated[0]
+        ? res.status(201).send({ message: `User ${updated[1][0].name} promoted to ${newRole}` })
+        : next()
     )
     .catch(next);
 };
