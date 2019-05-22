@@ -23,7 +23,6 @@ exports.init = app => {
       sessionMiddleware.isUserInRole('admin'),
       schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)
     ],
-    users.changeUserRole('admin'),
-    users.userRegistration
+    users.adminUserRegistration
   );
 };
