@@ -13,8 +13,9 @@ describe('Health check', () => {
 });
 
 describe('POST /users', () => {
+  const agent = request(app);
   test('Test successful sign up. It should response with code 201', () =>
-    request(app)
+    agent
       .post('/users')
       .send({
         name: 'ArquiMedes Galileo',
@@ -27,9 +28,8 @@ describe('POST /users', () => {
         dictum.chai(response, 'Test successful sign up');
       }));
 
-  test('Test used email. It should respond with 503', () => {
-    const agent = request(app);
-    return agent
+  test('Test used email. It should respond with 503', () =>
+    agent
       .post('/users')
       .send({
         name: 'ArquiMedes',
@@ -50,8 +50,7 @@ describe('POST /users', () => {
             expect(response.statusCode).toBe(503);
             dictum.chai(response, 'Test used email');
           })
-      );
-  });
+      ));
 
   test('Test invalid password. It should fail with code 422', () =>
     request(app)

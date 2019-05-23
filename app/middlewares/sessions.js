@@ -7,11 +7,20 @@ exports.isUserAuthenticated = (req, res, next) => {
     return helper.sessions
       .validateToken(token)
       .then(decodedToken => {
-        req.body.role = decodedToken.role;
-        req.body.expiresAt = decodedToken.exp;
+        req.headers.inSession = {
+          id: decodedToken.id,
+          email: decodedToken.email,
+          role: decodedToken.role,
+          expiresAt: decodedToken.exp
+        };
         return next();
       })
       .catch(error => next(errors.sessionError(`Session error: ${error.message}`)));
   }
   return next(errors.sessionError('Session error: no token provided'));
 };
+
+exports.isUserInRole = expectedRole => (req, res, next) =>
+  req.headers.inSession.role === expectedRole
+    ? next()
+    : next(errors.sessionError(`Session error: ${expectedRole} user expected`));

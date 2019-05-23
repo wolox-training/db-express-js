@@ -4,8 +4,8 @@ exports.signUp = {
   name: {
     in: ['body'],
     isLength: { options: { min: 1 } },
-    custom: {
-      options: value => helper.testRegex(value, "^[a-z' ]+$", 'i')
+    matches: {
+      options: /^[a-z' ]+$/i
     },
     trim: true,
     customSanitizer: { options: helper.formatName },
@@ -14,8 +14,8 @@ exports.signUp = {
   last_name: {
     in: ['body'],
     isLength: { options: { min: 1 } },
-    custom: {
-      options: value => helper.testRegex(value, "^[a-z' ]+$", 'i')
+    matches: {
+      options: /^[a-z' ]+$/i
     },
     trim: true,
     customSanitizer: { options: helper.formatName },
@@ -23,8 +23,8 @@ exports.signUp = {
   },
   email: {
     in: ['body'],
-    custom: {
-      options: value => helper.testRegex(value, '^[a-zñ0-9.+_-]+@(wolox.(ar|cl|co|com))$', 'i')
+    matches: {
+      options: /^[a-zñ0-9.+_-]+@(wolox.(ar|cl|co|com))$/i
     },
     normalizeEmail: { options: { all_lowercase: true } },
     trim: true,
@@ -35,14 +35,19 @@ exports.signUp = {
     isLength: { options: { min: 8, max: 30 } },
     trim: true,
     errorMessage: 'Please enter a valid password with 8 or more characters.'
+  },
+  role: {
+    isEmpty: true,
+    customSanitizer: { options: () => 'standard' },
+    errorMessage: 'Role asignment cannot be done from the request'
   }
 };
 
 exports.logIn = {
   email: {
     in: ['body'],
-    custom: {
-      options: value => helper.testRegex(value, '^[a-zñ0-9.+_-]+@(wolox.(ar|cl|co|com))$', 'i')
+    matches: {
+      options: /^[a-zñ0-9.+_-]+@(wolox.(ar|cl|co|com))$/i
     },
     normalizeEmail: { options: { all_lowercase: true } },
     trim: true,

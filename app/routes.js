@@ -15,4 +15,14 @@ exports.init = app => {
   app.get('/users/', [sessionMiddleware.isUserAuthenticated, paginate.middleware(3, 10)], users.getUsersList);
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post('/users/sessions', [schemaMiddleware.validateSchemaAndFail(schemas.users.logIn)], users.userLogIn);
+
+  app.post(
+    '/admin/users',
+    [
+      sessionMiddleware.isUserAuthenticated,
+      sessionMiddleware.isUserInRole('admin'),
+      schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)
+    ],
+    users.adminUserRegistration
+  );
 };
