@@ -1,1 +1,1 @@
-web: nodemon --inspect server.js
+web: node server.js
