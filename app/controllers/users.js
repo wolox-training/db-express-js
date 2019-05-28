@@ -71,12 +71,9 @@ exports.adminUserRegistration = (req, res, next) => {
 };
 
 exports.getUserAlbumsList = (req, res, next) => {
-  let userId = req.session.id;
-  if (req.session.role === 'admin') {
-    userId = req.params.id ? req.params.id : req.session.id;
-  }
+  logger.info(`GET method start. Fetching albums list as ${req.session.role} user`);
   return albums
-    .getUserAlbums(userId)
+    .getUserAlbums(req.params.id)
     .then(albumList => res.status(200).send(albumList))
     .catch(next);
 };
