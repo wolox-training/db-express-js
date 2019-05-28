@@ -4,8 +4,6 @@ const request = require('supertest'),
   dictum = require('dictum.js'),
   { User } = require('../app/models');
 
-jest.mock('../app/services/albums');
-
 const createUserAndLogin = () => {
   const user = {
     name: 'Arquimedes',
