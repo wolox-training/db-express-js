@@ -15,9 +15,6 @@ exports.albumApiError = message => internalError(message, exports.ALBUM_API_ERRO
 exports.USER_VALIDATION_ERROR = 'user_validation_error';
 exports.userValidationError = message => internalError(message, exports.USER_VALIDATION_ERROR);
 
-exports.UNIQUE_CONSRAINT_ERROR = 'unique_constraint_error';
-exports.uniqueConstraintError = message => internalError(message, exports.USER_VALIDATION_ERROR);
-
 exports.SCHEMA_ERROR = 'schema_error';
 exports.schemaError = message => internalError(message, exports.SCHEMA_ERROR);
 
@@ -26,3 +23,6 @@ exports.badLogInError = message => internalError(message, exports.BAD_LOGIN_ERRO
 
 exports.SESSION_ERROR = 'session_error';
 exports.sessionError = message => internalError(message, exports.SESSION_ERROR);
+
+exports.ALBUM_SERVICE_ERROR = 'album_service_error';
+exports.albumServiceError = message => internalError(message, exports.ALBUM_SERVICE_ERROR);

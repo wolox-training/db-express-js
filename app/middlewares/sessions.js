@@ -7,7 +7,7 @@ exports.isUserAuthenticated = (req, res, next) => {
     return helper.sessions
       .validateToken(token)
       .then(decodedToken => {
-        req.headers.inSession = {
+        req.session = {
           id: decodedToken.id,
           email: decodedToken.email,
           role: decodedToken.role,
@@ -21,6 +21,6 @@ exports.isUserAuthenticated = (req, res, next) => {
 };
 
 exports.isUserInRole = expectedRole => (req, res, next) =>
-  req.headers.inSession.role === expectedRole
+  req.session.role === expectedRole
     ? next()
     : next(errors.sessionError(`Session error: ${expectedRole} user expected`));
