@@ -4,12 +4,13 @@ const errors = require('../errors'),
 const DEFAULT_STATUS_CODE = 500;
 
 const statusCodes = {
-  [errors.DATABASE_ERROR]: 503,
   [errors.DEFAULT_ERROR]: 500,
+  [errors.DATABASE_ERROR]: 503,
   [errors.ALBUM_API_ERROR]: 503,
   [errors.SCHEMA_ERROR]: 422,
   [errors.BAD_LOGIN_ERROR]: 403,
-  [errors.SESSION_ERROR]: 440
+  [errors.SESSION_ERROR]: 440,
+  [errors.ALBUM_SERVICE_ERROR]: 422
 };
 
 exports.handle = (error, req, res, next) => {

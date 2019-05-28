@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    'users',
+    'User',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: DataTypes.STRING, allowNull: false },
@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       role: { type: DataTypes.STRING, defaultValue: 'standard', allowNull: false }
     },
     {
-      underscore: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
+      underscored: true,
+      tableName: 'users'
     }
   );
+
+  User.associate = models => {
+    User.hasMany(models.Album);
+  };
+
   return User;
 };

@@ -1,7 +1,7 @@
 const request = require('supertest'),
   app = require('../app'),
-  //  dictum = require('dictum.js'),
-  { users } = require('../app/models');
+  dictum = require('dictum.js'),
+  { User } = require('../app/models');
 
 describe('POST /admin/users', () => {
   const agent = request(app);
@@ -12,9 +12,8 @@ describe('POST /admin/users', () => {
     password: '$2b$10$QyCTfl29yXujZPG8HbVxVeeW2dgmE6nwqW2GtQHqydN7E55uMjCkC',
     role: 'admin'
   };
-  test('Test admin user create. It should respond with code 201', () =>
-    users
-      .create(adminUser)
+  test('Test admin user creation. It should respond with code 201', () =>
+    User.create(adminUser)
       .then(() =>
         agent.post('/users/sessions').send({
           email: 'arquimedes.ali@wolox.co',
@@ -32,11 +31,12 @@ describe('POST /admin/users', () => {
             password: '1234.12312'
           })
       )
-      .then(response => expect(response.statusCode).toBe(201)));
-
+      .then(response => {
+        dictum.chai(response, 'Test admin user creation');
+        return expect(response.statusCode).toBe(201);
+      }));
   test('Test fail due to logged user is not admin. It should respond with code 440', () =>
-    users
-      .create({ ...adminUser, role: 'standard' })
+    User.create({ ...adminUser, role: 'standard' })
       .then(() =>
         agent.post('/users/sessions').send({
           email: 'arquimedes.ali@wolox.co',
@@ -54,5 +54,8 @@ describe('POST /admin/users', () => {
             password: '1234.12312'
           })
       )
-      .then(response => expect(response.statusCode).toBe(440)));
+      .then(response => {
+        dictum.chai(response, 'Test fail due to logged user is not admin');
+        return expect(response.statusCode).toBe(440);
+      }));
 });
