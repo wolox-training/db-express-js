@@ -37,7 +37,7 @@ exports.getAlbumById = id => {
   logger.info(`Request to make: ${options.method} ${options.uri}`);
   return request(options).catch(error =>
     error.statusCode === 404
-      ? null
+      ? Promise.reject(errors.itemNotFoundError('Album not found'))
       : Promise.reject(errors.albumApiError(`Error getting response from Album API. ${error.message}`))
   );
 };

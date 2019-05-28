@@ -1,5 +1,6 @@
 const logger = require('../logger'),
   users = require('../services/users'),
+  albums = require('../services/albums'),
   usersMapper = require('../mappers/users'),
   helper = require('../helpers'),
   errors = require('../errors');
@@ -66,5 +67,13 @@ exports.adminUserRegistration = (req, res, next) => {
         ? res.status(201).send({ message: `User ${updated[1][0].name} promoted to admin` })
         : exports.userRegistration(req, res, next)
     )
+    .catch(next);
+};
+
+exports.getUserAlbumsList = (req, res, next) => {
+  logger.info(`GET method start. Fetching albums list as ${req.session.role} user`);
+  return albums
+    .getUserAlbums(req.params.id)
+    .then(albumList => res.status(200).send(albumList))
     .catch(next);
 };

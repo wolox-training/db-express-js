@@ -3,6 +3,7 @@ const { healthCheck } = require('./controllers/healthCheck'),
   users = require('./controllers/users'),
   schemaMiddleware = require('./middlewares/schema_validator'),
   sessionMiddleware = require('./middlewares/sessions'),
+  albumsMiddleware = require('./middlewares/albums'),
   schemas = require('./schemas'),
   paginate = require('express-paginate');
 
@@ -16,6 +17,15 @@ exports.init = app => {
   app.get('/users/', [sessionMiddleware.isUserAuthenticated, paginate.middleware(3, 10)], users.getUsersList);
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post('/users/sessions', [schemaMiddleware.validateSchemaAndFail(schemas.users.logIn)], users.userLogIn);
+  app.get(
+    '/users/:id/albums',
+    [
+      sessionMiddleware.isUserAuthenticated,
+      schemaMiddleware.validateSchemaAndFail(schemas.params.isId),
+      albumsMiddleware.albumsListAsAdmin
+    ],
+    users.getUserAlbumsList
+  );
 
   app.post(
     '/admin/users',

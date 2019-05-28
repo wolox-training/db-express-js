@@ -28,8 +28,8 @@ describe('GET /users', () => {
               .get('/users')
               .set({ Authorization: logIn.headers.authorization })
               .then(response => {
-                expect(response.statusCode).toBe(200);
                 dictum.chai(response, 'Test get users list. It should respond with code 200');
+                return expect(response.statusCode).toBe(200);
               });
           });
       });
