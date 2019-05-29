@@ -19,7 +19,7 @@ exports.getAlbums = () => {
 exports.getPhotosByAlbumId = id => {
   const options = {
     method: 'GET',
-    uri: `${endpoints.albumApiUrl}/:${id}/photos`,
+    uri: `${endpoints.albumApiUrl}/${id}/photos`,
     json: true
   };
   logger.info(`Request to make: ${options.method} ${options.uri}`);

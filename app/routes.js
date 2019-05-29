@@ -26,6 +26,11 @@ exports.init = app => {
     ],
     users.getUserAlbumsList
   );
+  app.get(
+    '/users/albums/:id/photos',
+    [sessionMiddleware.isUserAuthenticated, schemaMiddleware.validateSchemaAndFail(schemas.params.isId)],
+    users.getUserPhotoAlbum
+  );
 
   app.post(
     '/admin/users',
