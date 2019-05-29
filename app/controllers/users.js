@@ -77,3 +77,21 @@ exports.getUserAlbumsList = (req, res, next) => {
     .then(albumList => res.status(200).send(albumList))
     .catch(next);
 };
+
+exports.getUserPhotoAlbum = (req, res, next) => {
+  logger.info(`GET method start. Fetching photo album with id: ${req.params.id}`);
+  const userId = req.session.id;
+  const albumId = req.params.id;
+  return albums
+    .getUserAlbums(userId)
+    .then(userAlbums =>
+      userAlbums.some(album => album.id === albumId)
+        ? albums.getPhotosByAlbumId(albumId)
+        : Promise.reject(errors.albumServiceError(`The user has not purchased the album with id ${albumId}`))
+    )
+    .then(photos => {
+      const photoAlbum = photos.filter(photo => parseInt(photo.albumId) === albumId);
+      return res.status(200).send(photoAlbum);
+    })
+    .catch(next);
+};

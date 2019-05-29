@@ -32,7 +32,7 @@ describe('GET /users/:id/albums', () => {
         .get('/users/200/albums')
         .set({ Authorization: logIn.headers.authorization })
         .then(response => {
-          dictum.chai(response, 'Test get albums of a different user as admin userr');
+          dictum.chai(response, 'Test get albums of a different user as admin user');
           return expect(response.statusCode).toBe(200);
         })
     ));

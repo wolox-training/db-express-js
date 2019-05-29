@@ -1,5 +1,6 @@
 const request = require('supertest'),
   app = require('../app'),
+  nock = require('nock'),
   { User } = require('../app/models');
 
 exports.createUserAndLogin = role => {
@@ -18,4 +19,10 @@ exports.createUserAndLogin = role => {
         password: '1234_wol0x'
       })
   );
+};
+
+exports.nockGetJsonplaceholder = (route, code, response) => {
+  nock('https://jsonplaceholder.typicode.com')
+    .get(route)
+    .reply(code, response);
 };
