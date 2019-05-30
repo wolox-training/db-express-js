@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       lastName: { type: DataTypes.STRING, allowNull: false, field: 'last_name' },
       email: { type: DataTypes.STRING, allowNull: false, unique: true },
       password: { type: DataTypes.STRING, allowNull: false },
-      role: { type: DataTypes.STRING, defaultValue: 'standard', allowNull: false }
+      role: { type: DataTypes.STRING, allowNull: false, defaultValue: 'standard' },
+      secret: { type: DataTypes.INTEGER, allowNull: false, defaultValue: '-secret-of-a-new-user-' }
     },
     {
       underscored: true,
