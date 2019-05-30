@@ -1,6 +1,7 @@
 const request = require('supertest'),
   app = require('../app'),
   nock = require('nock'),
+  jwt = require('jsonwebtoken'),
   { User } = require('../app/models');
 
 exports.createUserAndLogin = role => {
@@ -25,4 +26,11 @@ exports.nockGetJsonplaceholder = (route, code, response) => {
   nock('https://jsonplaceholder.typicode.com')
     .get(route)
     .reply(code, response);
+};
+
+exports.forceTokenToExpire = token => {
+  const payload = jwt.decode(token);
+  payload.exp = payload.iat;
+  const expiredToken = jwt.sign(payload, '-secret-of-a-new-user-', { expiresAt: 0 });
+  return expiredToken;
 };

@@ -1,18 +1,16 @@
 const errors = require('./../errors'),
+  users = require('../services/users'),
   helper = require('../helpers');
 
 exports.isUserAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
-    return helper.sessions
-      .validateToken(token)
+    const payload = helper.sessions.decodeToken(token);
+    return users
+      .getUserSecretById(payload.id)
+      .then(result => helper.sessions.validateToken(token, result.secret))
       .then(decodedToken => {
-        req.session = {
-          id: decodedToken.id,
-          email: decodedToken.email,
-          role: decodedToken.role,
-          expiresAt: decodedToken.exp
-        };
+        req.session = decodedToken;
         return next();
       })
       .catch(error => next(errors.sessionError(`Session error: ${error.message}`)));
