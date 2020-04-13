@@ -9,7 +9,7 @@
           "required": false,
           "schema": {
             "type": "string",
-            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4NTk1OTU0NCwiZXhwIjoxNTg1OTYxMzQ0fQ.oHcP1gVoX5AJDXjKHnCWyYadeGc3Gd1oiriF59iqpcY"
+            "example": "eyJ0eXAiOiJKV1ZxXQiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4NTk1OTU0NCwiZXhwIjoxNTg1OTYxMzQ0fQ.oHcP1gVoX5AJDXjKHnCWyYadeGc3Gd1oiriF59iqpcY"
           }
         },
         {
