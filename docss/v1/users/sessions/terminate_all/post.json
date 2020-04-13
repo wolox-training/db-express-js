@@ -1,0 +1,11 @@
+{
+  "/users/sessions/terminate_all": {
+    "post": {
+      "description": "post /users/sessions/terminate_all",
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

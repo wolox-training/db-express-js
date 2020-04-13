@@ -1,0 +1,11 @@
+{
+  "/albums/:id": {
+    "post": {
+      "description": "post /albums/:id",
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

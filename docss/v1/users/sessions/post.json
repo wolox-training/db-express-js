@@ -1,0 +1,87 @@
+{
+  "/users/sessions": {
+    "post": {
+      "description": "post /users/sessions",
+      "parameters": [
+        {
+          "in": "headers",
+          "name": "content-type",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "application/json"
+          }
+        },
+        {
+          "in": "headers",
+          "name": "content-length",
+          "required": false,
+          "schema": {
+            "type": "number",
+            "example": 57
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "post /users/sessions",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/postUsersSessions403_request0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "responses": {
+        "403": {
+          "description": "post /users/sessions",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/postUsersSessions403_response0"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "postUsersSessions403_request0": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "luci.alvarez@wolox.ar"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234_wol0x"
+          }
+        }
+      },
+      "postUsersSessions403_response0": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "The email or password provided is incorrect"
+          },
+          "internal_code": {
+            "type": "string",
+            "example": "bad_login_error"
+          }
+        }
+      }
+    }
+  }
+}

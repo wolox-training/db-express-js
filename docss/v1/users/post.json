@@ -1,0 +1,11 @@
+{
+  "/users": {
+    "post": {
+      "description": "post /users",
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

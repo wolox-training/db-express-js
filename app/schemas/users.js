@@ -1,4 +1,5 @@
 const helper = require('../helpers');
+const { User } = require('../models');
 
 exports.signUp = {
   name: {
@@ -24,11 +25,13 @@ exports.signUp = {
   email: {
     in: ['body'],
     matches: {
-      options: /^[a-zñ0-9.+_-]+@(wolox.(ar|cl|co|com))$/i
+      options: /^[a-zA-Z0-9]+@wolox.([A-Za-z])+$/,
+      errorMessage: 'The email must have the wolox domain'
     },
-    normalizeEmail: { options: { all_lowercase: true } },
-    trim: true,
-    errorMessage: 'The email has to be a valid one in Wolox domains.'
+    custom: {
+      options: value => User.findAll({ where: { email: value } }).then(users => !(users.length > 0)),
+      errorMessage: 'Email must be unique'
+    }
   },
   password: {
     in: ['body'],

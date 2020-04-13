@@ -1,16 +1,20 @@
+/* eslint-disable no-underscore-dangle */
 const request = require('supertest'),
   app = require('../app'),
   util = require('./util'),
-  dictum = require('dictum.js');
+  dictum = require('dictum.js'),
+  { docs } = require('../documentation');
 
 describe('GET /users/:id/albums', () => {
   test('Test get albums list as standard user. It should responde with code 200', () =>
     util.createUserAndLogin('standar').then(logIn =>
       request(app)
-        .get('/users/1/albums')
+        .get('/users/1/albums?name=Dani')
+        .query({ name: 'Daniel', id: 2 })
         .set({ Authorization: logIn.headers.authorization })
         .then(response => {
           dictum.chai(response, 'Test get albums list as standard user');
+          docs.genDocs(response, { description: 'this does stuff' });
           return expect(response.statusCode).toBe(200);
         })
     ));

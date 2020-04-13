@@ -1,0 +1,11 @@
+{
+  "/users/albums/:id/photos": {
+    "get": {
+      "description": "get /users/albums/:id/photos",
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

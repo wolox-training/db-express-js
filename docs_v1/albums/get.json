@@ -1,0 +1,11 @@
+{
+  "/albums": {
+    "get": {
+      "description": "get /albums",
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

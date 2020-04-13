@@ -1,7 +1,8 @@
 const request = require('supertest'),
   app = require('../app'),
   dictum = require('dictum.js'),
-  { User } = require('../app/models');
+  { User } = require('../app/models'),
+  { docs } = require('../documentation');
 
 describe('POST /admin/users', () => {
   const agent = request(app);
@@ -32,6 +33,7 @@ describe('POST /admin/users', () => {
           })
       )
       .then(response => {
+        docs.genDocs(response, { description: 'user' });
         dictum.chai(response, 'Test admin user creation');
         return expect(response.statusCode).toBe(201);
       }));

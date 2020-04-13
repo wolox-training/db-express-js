@@ -1,5 +1,5 @@
 <html><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /><script src="https://code.jquery.com/jquery-1.12.2.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script><style> pre { width: 95%; } </style></head><body><div class="container"><div class="jumbotron"><h1>Admin</h1></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-admin-users-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-admin-users-POST" href="#collapse-admin-users-POST">POST /admin/users</a></h4></div><div id="collapse-admin-users-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-admin-users-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU1OTE4MjgzNiwiZXhwIjoxNTU5MTg0NjM2fQ.5vO-XZVsK_QXmWoBR9LXM2eXEV7PG-Jyzc3CiZxuAS0",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4NTk1OTU0NCwiZXhwIjoxNTg1OTYxMzQ0fQ.oHcP1gVoX5AJDXjKHnCWyYadeGc3Gd1oiriF59iqpcY",
   "content-type": "application/json",
   "content-length": 85
 }</pre><h5>Body</h5><pre>{
@@ -7,14 +7,17 @@
   "last_name": "Test",
   "email": "jon.test@wolox.co",
   "password": "1234.12312"
-}</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 201</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU1OTE4MjgzNiwiZXhwIjoxNTU5MTg0NjM2fQ.5vO-XZVsK_QXmWoBR9LXM2eXEV7PG-Jyzc3CiZxuAS0",
+}</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 422</h5><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4NTk1OTU0NCwiZXhwIjoxNTg1OTYxMzQ0fQ.oHcP1gVoX5AJDXjKHnCWyYadeGc3Gd1oiriF59iqpcY",
   "content-type": "application/json",
   "content-length": 85
 }</pre><h5>Body</h5><pre>{
-  "message": "User Jon created with ID: 2 and role: admin"
+  "message": [
+    "The email must have the wolox domain"
+  ],
+  "internal_code": "schema_error"
 }</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-admin-users-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-admin-users-POST" href="#collapse-admin-users-POST">POST /admin/users</a></h4></div><div id="collapse-admin-users-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-admin-users-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJzdGFuZGFyZCIsImlhdCI6MTU1OTE4MjgzNiwiZXhwIjoxNTU5MTg0NjM2fQ.xMbfjhodyY-0bNLWr4H6AcrIzQdLTyXk48MYhQVw5f0",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJzdGFuZGFyZCIsImlhdCI6MTU4NTk1OTU0NSwiZXhwIjoxNTg1OTYxMzQ1fQ.iapl0sK1mx0hLfOLw5WAVgTrAo-kner6E2bVcVa0sEI",
   "content-type": "application/json",
   "content-length": 85
 }</pre><h5>Body</h5><pre>{
@@ -23,7 +26,7 @@
   "email": "jon.test@wolox.co",
   "password": "1234.12312"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 440</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJzdGFuZGFyZCIsImlhdCI6MTU1OTE4MjgzNiwiZXhwIjoxNTU5MTg0NjM2fQ.xMbfjhodyY-0bNLWr4H6AcrIzQdLTyXk48MYhQVw5f0",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJzdGFuZGFyZCIsImlhdCI6MTU4NTk1OTU0NSwiZXhwIjoxNTg1OTYxMzQ1fQ.iapl0sK1mx0hLfOLw5WAVgTrAo-kner6E2bVcVa0sEI",
   "content-type": "application/json",
   "content-length": 85
 }</pre><h5>Body</h5><pre>{

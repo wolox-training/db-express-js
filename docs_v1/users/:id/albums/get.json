@@ -1,0 +1,74 @@
+{
+  "/users/:id/albums": {
+    "get": {
+      "description": "get /users/:id/albums",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "name",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Dani"
+            }
+          }
+        },
+        {
+          "in": "query",
+          "name": "id",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "2"
+          }
+        },
+        {
+          "in": "path",
+          "name": "id",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "1"
+          }
+        },
+        {
+          "in": "headers",
+          "name": "authorization",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJzdGFuZGFyIiwiaWF0IjoxNTg1OTQyMDE1LCJleHAiOjE1ODU5NDM4MTV9.iLsn8PZq96wKwQyrz8AlX73StmL-MaST1Ni7-gASLho"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "get /users/:id/albums",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/getUsersIdAlbums200_response0"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "getUsersIdAlbums200_response0": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

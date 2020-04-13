@@ -1,6 +1,7 @@
 const request = require('supertest'),
   app = require('../app'),
-  dictum = require('dictum.js');
+  dictum = require('dictum.js'),
+  { docs } = require('../documentation');
 
 describe('POST /users/sessions', () => {
   test('Test user-log in. It should respond with code 200', () => {
@@ -21,6 +22,7 @@ describe('POST /users/sessions', () => {
             password: '1234_wol0x'
           })
           .then(response => {
+            docs.genDocs(response, { description: 'sdasdasdasd' });
             expect(response.statusCode).toBe(200);
             dictum.chai(response, 'Test user-log in');
           })
@@ -45,6 +47,7 @@ describe('POST /users/sessions', () => {
             password: '1234_wol0x'
           })
           .then(response => {
+            // docs.genDocs(response, { description: 'sdasdasdasd' });
             expect(response.statusCode).toBe(403);
             dictum.chai(response, 'Test log-in fail due to wrong email');
           })

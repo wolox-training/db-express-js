@@ -15,7 +15,7 @@ exports.init = app => {
   app.get('/albums/:id/photos', albums.getPhotosByAlbumId);
   app.post('/albums/:id', [sessionMiddleware.isUserAuthenticated], albums.buyAlbum);
 
-  app.get('/users/', [sessionMiddleware.isUserAuthenticated, paginate.middleware(3, 10)], users.getUsersList);
+  app.get('/users', [sessionMiddleware.isUserAuthenticated, paginate.middleware(3, 10)], users.getUsersList);
   app.post('/users', [schemaMiddleware.validateSchemaAndFail(schemas.users.signUp)], users.userRegistration);
   app.post(
     '/admin/users',

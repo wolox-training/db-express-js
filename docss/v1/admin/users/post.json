@@ -1,0 +1,107 @@
+{
+  "/admin/users": {
+    "post": {
+      "description": "post /admin/users",
+      "parameters": [
+        {
+          "in": "headers",
+          "name": "authorization",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhcnF1aW1lZGVzLmFsaUB3b2xveC5jbyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4NTk1OTU0NCwiZXhwIjoxNTg1OTYxMzQ0fQ.oHcP1gVoX5AJDXjKHnCWyYadeGc3Gd1oiriF59iqpcY"
+          }
+        },
+        {
+          "in": "headers",
+          "name": "content-type",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "example": "application/json"
+          }
+        },
+        {
+          "in": "headers",
+          "name": "content-length",
+          "required": false,
+          "schema": {
+            "type": "number",
+            "example": 85
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "post /admin/users",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/postAdminUsers422_request0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "responses": {
+        "422": {
+          "description": "post /admin/users",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/postAdminUsers422_response0"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "postAdminUsers422_request0": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jon"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "email": {
+            "type": "string",
+            "example": "jon.test@wolox.co"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234.12312"
+          }
+        }
+      },
+      "postAdminUsers422_response0": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "The email must have the wolox domain"
+            }
+          },
+          "internal_code": {
+            "type": "string",
+            "example": "schema_error"
+          }
+        }
+      }
+    }
+  }
+}
